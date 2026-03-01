@@ -1300,9 +1300,49 @@ section { padding:120px 0; }
 }
 #art-read-content { padding:0 0 52px; }
 .art-read__hero {
-  height:320px; background:var(--linen); position:relative; overflow:hidden;
+  height: 320px;
+  background: var(--linen);
+  position: relative;
+  overflow: hidden;
+  margin: 0;           /* remove any inherited margin */
+  border-radius: 0;    /* remove any inherited border-radius */
 }
-.art-read__hero img { width:100%; height:100%; object-fit:cover; }
+.art-read__hero img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;      /* removes bottom gap under image */
+}
+/* Push close button OVER the image, not above it */
+.art-read-close {
+  position: fixed;     /* fixed so it stays visible while scrolling */
+  top: 16px;
+  right: 16px;
+  z-index: 10;
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(6px);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 12px rgba(0,0,0,.15);
+  border: none;
+  cursor: pointer;
+  color: var(--ink);
+}
+
+.art-read-close:hover {
+  background: var(--white);
+  transform: scale(1.08);
+}
+
+/* Make the modal itself have no top padding */
+.art-read-modal {
+  padding: 0 !important;
+  overflow-y: auto;
+}
 .art-read__hero-ph {
   width:100%; height:100%; display:flex; align-items:center; justify-content:center;
   background:linear-gradient(135deg, var(--cream-2), var(--linen));
