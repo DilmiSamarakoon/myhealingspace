@@ -137,34 +137,64 @@
 <!-- ════════════════════════════════════════
      ABOUT
 ════════════════════════════════════════ -->
+<!-- REPLACE your existing about section with this -->
+
 <section id="about" class="about">
   <div class="wrap">
+
+    <!-- Top label -->
+    <div class="about__eyebrow">
+      <span class="about__eyebrow-line"></span>
+      <span>Meet Your Guide</span>
+    </div>
+
     <div class="about__inner">
 
+      <!-- LEFT: Photo collage -->
       <div class="about__visual reveal-l">
-        <div class="about__accent-circle"></div>
-        <div class="about__photo about__photo--main">
+
+        <!-- Warm background blob -->
+        <div class="about__bg-blob"></div>
+
+        <!-- Main portrait — tall card -->
+        <div class="about__card-main">
           <img
             src="https://static.wixstatic.com/media/b3c662_34106cece4f244fea83bac28e03fd0ce~mv2.jpeg/v1/crop/x_26,y_53,w_561,h_584/fill/w_400,h_520,al_c,q_80,enc_avif,quality_auto/WhatsApp%20Image%202026-01-08%20at%2010_19_18.jpeg"
             alt="Asha Wanigasekera"
             onerror="this.style.background='#c9b99a'">
+          <div class="about__card-main-label">
+            <i class="fas fa-heart-pulse"></i>
+            <span>20+ Years</span>
+          </div>
         </div>
-        <div class="about__photo about__photo--sub">
+
+        <!-- Secondary portrait — small square -->
+        <div class="about__card-sub">
           <img
             src="https://static.wixstatic.com/media/b3c662_f1d7bfe9f8b34cae8de66f3392b71ded~mv2.jpg/v1/crop/x_1,y_0,w_429,h_430/fill/w_300,h_300,al_c,q_80,enc_avif,quality_auto/b3c662_f1d7bfe9f8b34cae8de66f3392b71ded~mv2.jpg"
             alt="Asha Wanigasekera"
             onerror="this.style.background='#b8d4c8'">
         </div>
-        <div class="about__script-bg">Heal</div>
+
+        <!-- Floating quote pill -->
+        <div class="about__quote-pill">
+          <i class="fas fa-quote-left"></i>
+          <span>Healing begins with safety</span>
+        </div>
+
+        <!-- Decorative script watermark -->
+        <div class="about__watermark">Heal</div>
+
       </div>
 
-      <div class="reveal-r">
-        <div class="t-label" style="color:var(--rose);margin-bottom:16px;display:flex;align-items:center;gap:12px">
-          <span style="display:block;width:28px;height:1px;background:var(--rose)"></span>
-          Meet Your Guide
-        </div>
-        <h2 class="about__name">Asha<br><em>Wanigasekera</em></h2>
-        <p class="about__role">Counseling Psychologist · SENCO · Special Educator</p>
+      <!-- RIGHT: Content -->
+      <div class="about__content reveal-r">
+
+        <h2 class="about__name">
+          Asha<br>
+          <em>Wanigasekera</em>
+        </h2>
+        <p class="about__role">Counseling Psychologist &middot; SENCO &middot; Special Educator</p>
 
         <p class="about__bio">
           I am a Counselling Psychologist with over 20 years of experience working
@@ -173,38 +203,64 @@
           emotionally safe.
         </p>
 
+        <!-- Credential tags -->
         <div class="about__tags">
-          <span class="about__tag">MSc Psychology</span>
-          <span class="about__tag">BSc Psychology</span>
-          <span class="about__tag">HND Child Psy.</span>
-          <span class="about__tag">Dipl. Counseling</span>
-          <span class="about__tag">UAE / KHDA Approved</span>
+          <span class="about__tag"><i class="fas fa-graduation-cap"></i> MSc Psychology</span>
+          <span class="about__tag"><i class="fas fa-graduation-cap"></i> BSc Psychology</span>
+          <span class="about__tag"><i class="fas fa-certificate"></i> HND Child Psy.</span>
+          <span class="about__tag"><i class="fas fa-certificate"></i> Dipl. Counseling</span>
+          <span class="about__tag about__tag--accent"><i class="fas fa-star"></i> UAE / KHDA Approved</span>
         </div>
 
+        <!-- Focus areas — horizontal cards -->
         <div class="about__focuses">
           <div class="about__focus">
-            <div class="about__focus-icon"><i class="fas fa-heart"></i></div>
-            <div class="about__focus-text">Children &amp; parenting support — meeting families with compassion and care</div>
+            <div class="about__focus-icon">
+              <i class="fas fa-heart"></i>
+            </div>
+            <div class="about__focus-body">
+              <div class="about__focus-title">Children &amp; Parenting</div>
+              <div class="about__focus-text">Meeting families with compassion and care</div>
+            </div>
           </div>
           <div class="about__focus">
-            <div class="about__focus-icon"><i class="fas fa-puzzle-piece"></i></div>
-            <div class="about__focus-text">Special needs &amp; neurodiversity — strengths-based, inclusive guidance</div>
+            <div class="about__focus-icon">
+              <i class="fas fa-puzzle-piece"></i>
+            </div>
+            <div class="about__focus-body">
+              <div class="about__focus-title">Special Needs &amp; Neurodiversity</div>
+              <div class="about__focus-text">Strengths-based, inclusive guidance</div>
+            </div>
           </div>
           <div class="about__focus">
-            <div class="about__focus-icon"><i class="fas fa-spa"></i></div>
-            <div class="about__focus-text">Mindfulness &amp; emotional regulation for children, parents and educators</div>
+            <div class="about__focus-icon">
+              <i class="fas fa-spa"></i>
+            </div>
+            <div class="about__focus-body">
+              <div class="about__focus-title">Mindfulness Programs</div>
+              <div class="about__focus-text">Emotional regulation for all ages</div>
+            </div>
           </div>
           <div class="about__focus">
-            <div class="about__focus-icon"><i class="fas fa-seedling"></i></div>
-            <div class="about__focus-text">Awareness around children's mental health and community wellbeing</div>
+            <div class="about__focus-icon">
+              <i class="fas fa-seedling"></i>
+            </div>
+            <div class="about__focus-body">
+              <div class="about__focus-title">Community Awareness</div>
+              <div class="about__focus-text">Children's mental health &amp; wellbeing</div>
+            </div>
           </div>
         </div>
-      </div>
 
+        <a href="#contact" class="about__cta">
+          <i class="fas fa-calendar-check"></i>
+          Book a Session
+        </a>
+
+      </div>
     </div>
   </div>
 </section>
-
 
 <!-- ════════════════════════════════════════
      SERVICES
