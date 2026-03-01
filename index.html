@@ -3,168 +3,212 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="My Healing Space — A gentle space for clarity, calm, and emotional healing. Counseling, Special Education & Mindfulness in Sri Lanka.">
+  <meta name="description" content="My Healing Space — A sanctuary for clarity, calm, and emotional healing. Counseling, Special Education & Mindfulness in Sri Lanka.">
   <title>My Healing Space | Counseling & Wellness Sri Lanka</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&family=Great+Vibes&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&family=Pinyon+Script&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-<!-- ════════════════════════════════════════
+<!-- CURSOR -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-follower" id="cursorFollower"></div>
+
+<!-- ══════════════════════════════════════
      NAVIGATION
-════════════════════════════════════════ -->
+══════════════════════════════════════ -->
 <nav class="nav" id="nav">
-  <a href="#home" class="nav__logo">My Healing Space</a>
+  <a href="#home" class="nav__logo">
+    <span class="nav__logo-script">My Healing Space</span>
+    <span class="nav__logo-sub">Counselling · Mindfulness · Healing</span>
+  </a>
+
   <ul class="nav__links">
-    <li><a href="#home">Home</a></li>
-    <li><a href="#about">About</a></li>
-    <li><a href="#services">Programs</a></li>
-    <li><a href="#articles">Articles</a></li>
-    <li><a href="#contact">Contact</a></li>
-    <li><a href="#contact" class="nav__cta">Book Online</a></li>
+    <li><a href="#home" class="nav__link"><span>Home</span></a></li>
+    <li><a href="#about" class="nav__link"><span>About</span></a></li>
+    <li><a href="#services" class="nav__link"><span>Programs</span></a></li>
+    <li><a href="#articles" class="nav__link"><span>Articles</span></a></li>
+    <li><a href="#contact" class="nav__link"><span>Contact</span></a></li>
+    <li><a href="#contact" class="nav__book">
+      <i class="fas fa-calendar-check"></i>
+      <span>Book a Session</span>
+    </a></li>
   </ul>
+
   <button class="nav__ham" id="ham" aria-label="Menu">
-    <span></span><span></span><span></span>
+    <span></span><span></span>
   </button>
 </nav>
 
 <!-- Mobile Menu -->
 <div class="mob" id="mob">
+  <div class="mob__bg"></div>
   <button class="mob__close" id="mobX"><i class="fas fa-times"></i></button>
-  <a href="#home"     class="mob-link">Home</a>
-  <a href="#about"    class="mob-link">About</a>
-  <a href="#services" class="mob-link">Programs</a>
-  <a href="#articles" class="mob-link">Articles</a>
-  <a href="#contact"  class="mob-link">Contact</a>
-  <a href="#contact"  class="mob-link btn btn--moss" style="font-size:.85rem">Book Online</a>
+  <div class="mob__content">
+    <div class="mob__script">Menu</div>
+    <nav class="mob__nav">
+      <a href="#home" class="mob-link">Home</a>
+      <a href="#about" class="mob-link">About</a>
+      <a href="#services" class="mob-link">Programs</a>
+      <a href="#articles" class="mob-link">Articles</a>
+      <a href="#contact" class="mob-link">Contact</a>
+    </nav>
+    <a href="#contact" class="mob__cta">Book a Session →</a>
+    <div class="mob__contacts">
+      <a href="https://wa.me/94702704537"><i class="fab fa-whatsapp"></i> +94 702 704 537</a>
+      <a href="mailto:asha_wani@outlook.com"><i class="fas fa-envelope"></i> asha_wani@outlook.com</a>
+    </div>
+  </div>
 </div>
 
 
-<!-- ════════════════════════════════════════
+<!-- ══════════════════════════════════════
      HERO
-════════════════════════════════════════ -->
-<section id="home" style="padding:0">
-  <div class="hero">
+══════════════════════════════════════ -->
+<section id="home" class="hero-section">
 
-    <div class="hero__left">
-      <div class="hero__label">
-        <div class="hero__label-line"></div>
-        <span>Counseling · Mindfulness · Healing</span>
-      </div>
+  <!-- Ambient orbs -->
+  <div class="hero__orb hero__orb--1"></div>
+  <div class="hero__orb hero__orb--2"></div>
+  <div class="hero__orb hero__orb--3"></div>
 
-      <div class="hero__script">My Healing Space</div>
+  <!-- Grain overlay -->
+  <div class="hero__grain"></div>
 
-      <h1 class="hero__headline">
-        A gentle space<br>
-        for <em>clarity</em>,<br>
-        calm &amp; healing
-      </h1>
+  <div class="hero__image-panel">
+    <img src="images/image1.png" alt="My Healing Space" class="hero__photo" onerror="this.style.display='none'">
+    <div class="hero__image-overlay"></div>
+    <div class="hero__image-tint"></div>
+  </div>
 
-      <p class="hero__body">
-        Life can feel heavy — even when everything looks "fine" on the outside.
-        This is a space to pause, breathe, and begin again — without labels,
-        pressure, or judgement. You are always welcome here.
-      </p>
-
-      <div class="hero__actions">
-        <a href="#contact" class="btn btn--solid"><i class="fas fa-leaf"></i> Begin Your Journey</a>
-        <a href="#services" class="btn btn--ghost">Explore Programs</a>
-      </div>
-
-      <div class="hero__contacts">
-        <div class="hero__contact">
-          <i class="fab fa-whatsapp"></i>
-          <a href="https://wa.me/94702704537">+94 702 704 537</a>
-        </div>
-        <div class="hero__contact">
-          <i class="fas fa-envelope"></i>
-          <a href="mailto:asha_wani@outlook.com">asha_wani@outlook.com</a>
-        </div>
-      </div>
+  <div class="hero__content">
+    <div class="hero__eyebrow">
+      <div class="hero__eyebrow-line"></div>
+      <span>Est. 2004 · Panadura, Sri Lanka</span>
+      <div class="hero__eyebrow-line"></div>
     </div>
 
-    <div class="hero__right">
-      <img
-      src="images/image1.png"
-        alt="My Healing Space" class="hero__img"
-        onerror="this.style.background='#e8dfd0'">
-      <div class="hero__overlay"></div>
-      <div class="hero__deco hero__deco--1"></div>
-      <div class="hero__deco hero__deco--2"></div>
-      <div class="hero__deco hero__deco--3"></div>
-      <div class="hero__badge">
-        <div class="hero__badge-inner">
-          <i class="fas fa-heart-pulse"></i>
-          <span>20+ Years</span>
-          <small>of Experience</small>
-        </div>
-      </div>
+    <h1 class="hero__title">
+      <span class="hero__title-line hero__title-line--1">A Sanctuary</span>
+      <span class="hero__title-line hero__title-line--2"><em>for Your</em></span>
+      <span class="hero__title-line hero__title-line--3">Healing Journey</span>
+    </h1>
+
+    <p class="hero__desc">
+      Life can feel heavy — even when everything looks "fine" on the outside.
+      This is a space to pause, breathe, and begin again — without labels,
+      pressure, or judgement.
+    </p>
+
+    <div class="hero__actions">
+      <a href="#contact" class="btn-primary">
+        <span>Begin Your Journey</span>
+        <i class="fas fa-arrow-right"></i>
+      </a>
+      <a href="#about" class="btn-secondary">
+        <span>Meet Asha</span>
+      </a>
     </div>
 
+    <div class="hero__stats">
+      <div class="hero__stat">
+        <span class="hero__stat-num">20+</span>
+        <span class="hero__stat-label">Years Experience</span>
+      </div>
+      <div class="hero__stat-divider"></div>
+      <div class="hero__stat">
+        <span class="hero__stat-num">500+</span>
+        <span class="hero__stat-label">Families Supported</span>
+      </div>
+      <div class="hero__stat-divider"></div>
+      <div class="hero__stat">
+        <span class="hero__stat-num">4</span>
+        <span class="hero__stat-label">Core Programs</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero__scroll-hint">
+    <span>Scroll to Explore</span>
+    <div class="hero__scroll-line"></div>
   </div>
 </section>
 
 
-<!-- ════════════════════════════════════════
-     MARQUEE STRIP
-════════════════════════════════════════ -->
-<div class="marquee-strip">
+<!-- ══════════════════════════════════════
+     MARQUEE
+══════════════════════════════════════ -->
+<div class="marquee-wrap">
   <div class="marquee-track">
-    <div class="marquee-item"><span>Counselling</span><div class="marquee-dot"></div></div>
-    <div class="marquee-item"><span>Special Education</span><div class="marquee-dot"></div></div>
-    <div class="marquee-item"><span>Mindfulness</span><div class="marquee-dot"></div></div>
-    <div class="marquee-item"><span>Parenting Support</span><div class="marquee-dot"></div></div>
-    <div class="marquee-item"><span>Emotional Wellbeing</span><div class="marquee-dot"></div></div>
-    <div class="marquee-item"><span>Neurodiversity</span><div class="marquee-dot"></div></div>
-    <div class="marquee-item"><span>Social Awareness</span><div class="marquee-dot"></div></div>
-    <div class="marquee-item"><span>Online Sessions</span><div class="marquee-dot"></div></div>
-    <div class="marquee-item"><span>Counselling</span><div class="marquee-dot"></div></div>
-    <div class="marquee-item"><span>Special Education</span><div class="marquee-dot"></div></div>
-    <div class="marquee-item"><span>Mindfulness</span><div class="marquee-dot"></div></div>
-    <div class="marquee-item"><span>Parenting Support</span><div class="marquee-dot"></div></div>
-    <div class="marquee-item"><span>Emotional Wellbeing</span><div class="marquee-dot"></div></div>
-    <div class="marquee-item"><span>Neurodiversity</span><div class="marquee-dot"></div></div>
-    <div class="marquee-item"><span>Social Awareness</span><div class="marquee-dot"></div></div>
-    <div class="marquee-item"><span>Online Sessions</span><div class="marquee-dot"></div></div>
+    <div class="marquee-item"><i class="fas fa-leaf"></i><span>Counselling</span></div>
+    <div class="marquee-item"><i class="fas fa-puzzle-piece"></i><span>Special Education</span></div>
+    <div class="marquee-item"><i class="fas fa-spa"></i><span>Mindfulness</span></div>
+    <div class="marquee-item"><i class="fas fa-heart"></i><span>Parenting Support</span></div>
+    <div class="marquee-item"><i class="fas fa-seedling"></i><span>Emotional Wellbeing</span></div>
+    <div class="marquee-item"><i class="fas fa-brain"></i><span>Neurodiversity</span></div>
+    <div class="marquee-item"><i class="fas fa-globe"></i><span>Social Awareness</span></div>
+    <div class="marquee-item"><i class="fas fa-video"></i><span>Online Sessions</span></div>
+    <div class="marquee-item"><i class="fas fa-leaf"></i><span>Counselling</span></div>
+    <div class="marquee-item"><i class="fas fa-puzzle-piece"></i><span>Special Education</span></div>
+    <div class="marquee-item"><i class="fas fa-spa"></i><span>Mindfulness</span></div>
+    <div class="marquee-item"><i class="fas fa-heart"></i><span>Parenting Support</span></div>
+    <div class="marquee-item"><i class="fas fa-seedling"></i><span>Emotional Wellbeing</span></div>
+    <div class="marquee-item"><i class="fas fa-brain"></i><span>Neurodiversity</span></div>
+    <div class="marquee-item"><i class="fas fa-globe"></i><span>Social Awareness</span></div>
+    <div class="marquee-item"><i class="fas fa-video"></i><span>Online Sessions</span></div>
   </div>
 </div>
 
 
-<!-- ════════════════════════════════════════
+<!-- ══════════════════════════════════════
      ABOUT
-════════════════════════════════════════ -->
+══════════════════════════════════════ -->
 <section id="about" class="about">
+  <div class="about__bg-text">Asha</div>
   <div class="wrap">
-    <div class="about__inner">
+    <div class="about__layout">
 
-      <div class="about__visual reveal-l">
-        <div class="about__accent-circle"></div>
-        <div class="about__photo about__photo--main">
+      <div class="about__visuals reveal-l">
+        <div class="about__frame">
+          <div class="about__frame-border"></div>
           <img
             src="https://static.wixstatic.com/media/b3c662_34106cece4f244fea83bac28e03fd0ce~mv2.jpeg/v1/crop/x_26,y_53,w_561,h_584/fill/w_400,h_520,al_c,q_80,enc_avif,quality_auto/WhatsApp%20Image%202026-01-08%20at%2010_19_18.jpeg"
-            alt="Asha Wanigasekera"
-            onerror="this.style.background='#c9b99a'">
+            alt="Asha Wanigasekera" class="about__main-img"
+            onerror="this.style.background='#d4c4b0'">
+          <div class="about__img-caption">
+            <span class="about__img-caption-script">Asha</span>
+            <span>Counseling Psychologist</span>
+          </div>
         </div>
-        <div class="about__photo about__photo--sub">
+        <div class="about__secondary-frame">
           <img
             src="https://static.wixstatic.com/media/b3c662_f1d7bfe9f8b34cae8de66f3392b71ded~mv2.jpg/v1/crop/x_1,y_0,w_429,h_430/fill/w_300,h_300,al_c,q_80,enc_avif,quality_auto/b3c662_f1d7bfe9f8b34cae8de66f3392b71ded~mv2.jpg"
             alt="Asha Wanigasekera"
             onerror="this.style.background='#b8d4c8'">
         </div>
-        <div class="about__script-bg">Heal</div>
+        <div class="about__years-badge">
+          <div class="about__years-inner">
+            <span class="about__years-num">20<sup>+</sup></span>
+            <span class="about__years-label">Years of<br>Practice</span>
+          </div>
+        </div>
       </div>
 
-      <div class="reveal-r">
-        <div class="t-label" style="color:var(--rose);margin-bottom:16px;display:flex;align-items:center;gap:12px">
-          <span style="display:block;width:28px;height:1px;background:var(--rose)"></span>
-          Meet Your Guide
+      <div class="about__text reveal-r">
+        <div class="section-label">
+          <span class="section-label__line"></span>
+          <span>Meet Your Guide</span>
         </div>
-        <h2 class="about__name">Asha<br><em>Wanigasekera</em></h2>
-        <p class="about__role">Counseling Psychologist · SENCO · Special Educator</p>
+
+        <h2 class="about__name">
+          Asha<br>
+          <em>Wanigasekera</em>
+        </h2>
+        <p class="about__title-role">Counseling Psychologist · SENCO · Special Educator</p>
 
         <p class="about__bio">
           I am a Counselling Psychologist with over 20 years of experience working
@@ -173,31 +217,51 @@
           emotionally safe.
         </p>
 
-        <div class="about__tags">
-          <span class="about__tag">MSc Psychology</span>
-          <span class="about__tag">BSc Psychology</span>
-          <span class="about__tag">HND Child Psy.</span>
-          <span class="about__tag">Dipl. Counseling</span>
-          <span class="about__tag">UAE / KHDA Approved</span>
+        <div class="about__credentials">
+          <span>MSc Psychology</span>
+          <span>BSc Psychology</span>
+          <span>HND Child Psychology</span>
+          <span>Diploma in Counseling</span>
+          <span>UAE / KHDA Approved</span>
         </div>
 
-        <div class="about__focuses">
-          <div class="about__focus">
-            <div class="about__focus-icon"><i class="fas fa-heart"></i></div>
-            <div class="about__focus-text">Children &amp; parenting support — meeting families with compassion and care</div>
+        <div class="about__pillars">
+          <div class="about__pillar">
+            <div class="about__pillar-icon"><i class="fas fa-heart"></i></div>
+            <div class="about__pillar-body">
+              <strong>Children &amp; Families</strong>
+              <p>Meeting families with compassion and unwavering care</p>
+            </div>
           </div>
-          <div class="about__focus">
-            <div class="about__focus-icon"><i class="fas fa-puzzle-piece"></i></div>
-            <div class="about__focus-text">Special needs &amp; neurodiversity — strengths-based, inclusive guidance</div>
+          <div class="about__pillar">
+            <div class="about__pillar-icon"><i class="fas fa-puzzle-piece"></i></div>
+            <div class="about__pillar-body">
+              <strong>Special Needs &amp; Neurodiversity</strong>
+              <p>Strengths-based, inclusive guidance for every child</p>
+            </div>
           </div>
-          <div class="about__focus">
-            <div class="about__focus-icon"><i class="fas fa-spa"></i></div>
-            <div class="about__focus-text">Mindfulness &amp; emotional regulation for children, parents and educators</div>
+          <div class="about__pillar">
+            <div class="about__pillar-icon"><i class="fas fa-spa"></i></div>
+            <div class="about__pillar-body">
+              <strong>Mindfulness &amp; Regulation</strong>
+              <p>Emotional regulation for children, parents and educators</p>
+            </div>
           </div>
-          <div class="about__focus">
-            <div class="about__focus-icon"><i class="fas fa-seedling"></i></div>
-            <div class="about__focus-text">Awareness around children's mental health and community wellbeing</div>
+          <div class="about__pillar">
+            <div class="about__pillar-icon"><i class="fas fa-seedling"></i></div>
+            <div class="about__pillar-body">
+              <strong>Community Wellbeing</strong>
+              <p>Awareness around children's mental health in society</p>
+            </div>
           </div>
+        </div>
+
+        <div class="about__cta-row">
+          <a href="https://wa.me/94702704537" target="_blank" class="btn-primary">
+            <i class="fab fa-whatsapp"></i>
+            <span>Chat on WhatsApp</span>
+          </a>
+          <a href="#contact" class="btn-outline">Book Consultation</a>
         </div>
       </div>
 
@@ -206,76 +270,93 @@
 </section>
 
 
-<!-- ════════════════════════════════════════
+<!-- ══════════════════════════════════════
      SERVICES
-════════════════════════════════════════ -->
+══════════════════════════════════════ -->
 <section id="services" class="services">
+  <div class="services__grain"></div>
   <div class="wrap">
-    <div class="services__head reveal">
-      <div>
-        <div class="t-label" style="color:var(--moss);margin-bottom:16px;display:flex;align-items:center;gap:12px">
-          <span style="display:block;width:28px;height:1px;background:var(--moss)"></span>
-          Our Programs
-        </div>
-        <h2 class="services__title">How I Can<br><em>Support You</em></h2>
+
+    <div class="section-header reveal">
+      <div class="section-label">
+        <span class="section-label__line"></span>
+        <span>Our Programs</span>
       </div>
-      <p class="services__intro">
-        Every person arrives with their own story. These programs are designed to meet
-        you exactly where you are — with warmth, skill, and no judgement.
-      </p>
+      <h2 class="section-title">How I Can<br><em>Support You</em></h2>
+      <p class="section-intro">Every person arrives with their own story. These programs are designed to meet you exactly where you are — with warmth, skill, and no judgement.</p>
     </div>
 
     <div class="services__grid reveal">
-      <div class="svc">
-        <div class="svc__num">01</div>
-        <div class="svc__icon"><i class="fas fa-hand-holding-heart"></i></div>
-        <h3 class="svc__title">Counselling</h3>
-        <p class="svc__body">Support for children, adolescents, parents and adults — focusing on emotional wellbeing, behavioural concerns and life challenges. Available online and in-person, guided by care and ethics.</p>
-        <div class="svc__link">Enquire now</div>
+      <div class="svc-card" data-num="01">
+        <div class="svc-card__icon-wrap">
+          <div class="svc-card__icon"><i class="fas fa-hand-holding-heart"></i></div>
+        </div>
+        <div class="svc-card__body">
+          <h3 class="svc-card__title">Counselling</h3>
+          <p class="svc-card__text">Support for children, adolescents, parents and adults — focusing on emotional wellbeing, behavioural concerns and life challenges. Available online and in-person, guided by care and ethics.</p>
+          <a href="#contact" class="svc-card__link">Enquire Now <i class="fas fa-arrow-right"></i></a>
+        </div>
+        <div class="svc-card__num">01</div>
       </div>
 
-      <div class="svc">
-        <div class="svc__num">02</div>
-        <div class="svc__icon"><i class="fas fa-book-open"></i></div>
-        <h3 class="svc__title">Special Education &amp; Learning Support</h3>
-        <p class="svc__body">Understanding each child's unique profile. Guiding parents, supporting children with diverse needs, and collaborating with schools with a strengths-based, inclusive approach.</p>
-        <div class="svc__link">Enquire now</div>
+      <div class="svc-card" data-num="02">
+        <div class="svc-card__icon-wrap">
+          <div class="svc-card__icon"><i class="fas fa-book-open"></i></div>
+        </div>
+        <div class="svc-card__body">
+          <h3 class="svc-card__title">Special Education &amp; Learning Support</h3>
+          <p class="svc-card__text">Understanding each child's unique profile. Guiding parents, supporting children with diverse needs, and collaborating with schools with a strengths-based, inclusive approach.</p>
+          <a href="#contact" class="svc-card__link">Enquire Now <i class="fas fa-arrow-right"></i></a>
+        </div>
+        <div class="svc-card__num">02</div>
       </div>
 
-      <div class="svc">
-        <div class="svc__num">03</div>
-        <div class="svc__icon"><i class="fas fa-spa"></i></div>
-        <h3 class="svc__title">Mindfulness Programs</h3>
-        <p class="svc__body">Programs designed to support emotional regulation, self-awareness and calm. Offered for children, parents, educators and organizations — thoughtfully adapted to each age group.</p>
-        <div class="svc__link">Enquire now</div>
+      <div class="svc-card" data-num="03">
+        <div class="svc-card__icon-wrap">
+          <div class="svc-card__icon"><i class="fas fa-spa"></i></div>
+        </div>
+        <div class="svc-card__body">
+          <h3 class="svc-card__title">Mindfulness Programs</h3>
+          <p class="svc-card__text">Programs designed to support emotional regulation, self-awareness and calm. Offered for children, parents, educators and organizations — thoughtfully adapted to each age group.</p>
+          <a href="#contact" class="svc-card__link">Enquire Now <i class="fas fa-arrow-right"></i></a>
+        </div>
+        <div class="svc-card__num">03</div>
       </div>
 
-      <div class="svc">
-        <div class="svc__num">04</div>
-        <div class="svc__icon"><i class="fas fa-globe-asia"></i></div>
-        <h3 class="svc__title">Social Awareness &amp; Outreach</h3>
-        <p class="svc__body">Talks, workshops and collaborative programs building awareness around children's mental health, neurodiversity and emotional wellbeing within schools and communities.</p>
-        <div class="svc__link">Enquire now</div>
+      <div class="svc-card" data-num="04">
+        <div class="svc-card__icon-wrap">
+          <div class="svc-card__icon"><i class="fas fa-globe-asia"></i></div>
+        </div>
+        <div class="svc-card__body">
+          <h3 class="svc-card__title">Social Awareness &amp; Outreach</h3>
+          <p class="svc-card__text">Talks, workshops and collaborative programs building awareness around children's mental health, neurodiversity and emotional wellbeing within schools and communities.</p>
+          <a href="#contact" class="svc-card__link">Enquire Now <i class="fas fa-arrow-right"></i></a>
+        </div>
+        <div class="svc-card__num">04</div>
       </div>
     </div>
+
   </div>
 </section>
 
 
-<!-- ════════════════════════════════════════
-     PHILOSOPHY
-════════════════════════════════════════ -->
+<!-- ══════════════════════════════════════
+     PHILOSOPHY (DARK)
+══════════════════════════════════════ -->
 <section id="how" class="philosophy">
+  <div class="philosophy__ambient"></div>
   <div class="wrap">
-    <div class="philosophy__inner">
+    <div class="philosophy__layout">
 
       <div class="philosophy__left reveal-l">
-        <div class="t-label" style="color:var(--stone);margin-bottom:20px;display:flex;align-items:center;gap:12px">
-          <span style="display:block;width:28px;height:1px;background:var(--stone)"></span>
-          My Approach
+        <div class="section-label" style="--label-color: rgba(201,183,154,.5)">
+          <span class="section-label__line" style="background:var(--gold)"></span>
+          <span style="color:var(--gold)">My Approach</span>
         </div>
         <h2 class="philosophy__title">
-          Thoughtful,<br><em>human-centred</em><br>support
+          Thoughtful,<br>
+          <em>human-centred</em><br>
+          support
         </h2>
         <blockquote class="philosophy__quote">
           "Behavior is communication, and healing begins when people feel emotionally safe."
@@ -284,97 +365,99 @@
           There is no rushing here, and no one-size-fits-all approach. Each individual
           and family is met where they are, with full respect for their unique experiences and needs.
         </p>
+        <a href="#contact" class="btn-gold">Begin Your Healing →</a>
       </div>
 
-      <div class="philosophy__right reveal-r">
-        <div class="pillar">
-          <div class="pillar__em">🌱</div>
-          <div>
-            <div class="pillar__title">Child-centred &amp; developmentally sensitive</div>
-            <div class="pillar__text">Every interaction honours the child's pace, voice, and way of experiencing the world.</div>
+      <div class="philosophy__pillars reveal-r">
+        <div class="philo-card">
+          <div class="philo-card__glyph">🌱</div>
+          <div class="philo-card__content">
+            <h4>Child-centred &amp; developmentally sensitive</h4>
+            <p>Every interaction honours the child's pace, voice, and way of experiencing the world.</p>
           </div>
         </div>
-        <div class="pillar">
-          <div class="pillar__em">🤝</div>
-          <div>
-            <div class="pillar__title">Supportive of parents &amp; caregivers</div>
-            <div class="pillar__text">Parents are partners in the process — their wellbeing matters just as much.</div>
+        <div class="philo-card">
+          <div class="philo-card__glyph">🤝</div>
+          <div class="philo-card__content">
+            <h4>Supportive of parents &amp; caregivers</h4>
+            <p>Parents are partners in the process — their wellbeing matters just as much.</p>
           </div>
         </div>
-        <div class="pillar">
-          <div class="pillar__em">✨</div>
-          <div>
-            <div class="pillar__title">Strengths-based rather than problem-focused</div>
-            <div class="pillar__text">We look at what's working, what's possible, and what each person brings.</div>
+        <div class="philo-card">
+          <div class="philo-card__glyph">✨</div>
+          <div class="philo-card__content">
+            <h4>Strengths-based rather than problem-focused</h4>
+            <p>We look at what's working, what's possible, and what each person brings.</p>
           </div>
         </div>
-        <div class="pillar">
-          <div class="pillar__em">🛡️</div>
-          <div>
-            <div class="pillar__title">Guided by professional ethics &amp; care</div>
-            <div class="pillar__text">Confidentiality, respect, and integrity form the foundation of every session.</div>
+        <div class="philo-card">
+          <div class="philo-card__glyph">🛡️</div>
+          <div class="philo-card__content">
+            <h4>Guided by professional ethics &amp; care</h4>
+            <p>Confidentiality, respect, and integrity form the foundation of every session.</p>
           </div>
         </div>
       </div>
-
     </div>
   </div>
 </section>
 
 
-<!-- ════════════════════════════════════════
-     AUDIENCE
-════════════════════════════════════════ -->
-<section id="foryou" class="audience">
+<!-- ══════════════════════════════════════
+     FOR YOU
+══════════════════════════════════════ -->
+<section id="foryou" class="foryou">
   <div class="wrap">
-    <div class="audience__inner">
+    <div class="foryou__layout">
 
-      <div class="reveal-l">
-        <div class="t-label" style="color:var(--rose);margin-bottom:16px;display:flex;align-items:center;gap:12px">
-          <span style="display:block;width:28px;height:1px;background:var(--rose)"></span>
-          Is This Right For You?
+      <div class="foryou__left reveal-l">
+        <div class="section-label">
+          <span class="section-label__line"></span>
+          <span>Is This Right For You?</span>
         </div>
-        <h2 class="audience__title">
-          This space may be<br>right for you <em>if…</em>
+        <h2 class="foryou__title">
+          This space may be<br>
+          right for you <em>if…</em>
         </h2>
-        <p class="audience__sub">
-          You don't need to have it all figured out. If any of these resonate, reaching out is enough.
-        </p>
-        <div class="audience__list">
-          <div class="audience__item">
-            <div class="audience__icon"><i class="fas fa-child"></i></div>
-            <div class="audience__text">You're concerned about your child's emotions, behaviour or development</div>
+        <p class="foryou__sub">You don't need to have it all figured out. If any of these resonate, reaching out is enough.</p>
+
+        <div class="foryou__list">
+          <div class="foryou__item">
+            <span class="foryou__dot"></span>
+            <span>You're concerned about your child's emotions, behaviour or development</span>
           </div>
-          <div class="audience__item">
-            <div class="audience__icon"><i class="fas fa-users"></i></div>
-            <div class="audience__text">Parenting feels confusing or overwhelming at times</div>
+          <div class="foryou__item">
+            <span class="foryou__dot"></span>
+            <span>Parenting feels confusing or overwhelming at times</span>
           </div>
-          <div class="audience__item">
-            <div class="audience__icon"><i class="fas fa-puzzle-piece"></i></div>
-            <div class="audience__text">Your child has special needs and you're seeking respectful, understanding guidance</div>
+          <div class="foryou__item">
+            <span class="foryou__dot"></span>
+            <span>Your child has special needs and you're seeking respectful guidance</span>
           </div>
-          <div class="audience__item">
-            <div class="audience__icon"><i class="fas fa-wind"></i></div>
-            <div class="audience__text">You're looking for gentler ways to navigate stress and emotional overwhelm</div>
+          <div class="foryou__item">
+            <span class="foryou__dot"></span>
+            <span>You're looking for gentler ways to navigate stress and emotional overwhelm</span>
           </div>
-          <div class="audience__item">
-            <div class="audience__icon"><i class="fas fa-school"></i></div>
-            <div class="audience__text">Your school or organisation values emotional wellbeing and inclusion</div>
+          <div class="foryou__item">
+            <span class="foryou__dot"></span>
+            <span>Your school or organisation values emotional wellbeing and inclusion</span>
           </div>
         </div>
       </div>
 
-      <div class="reveal-r">
-        <div class="audience__cta">
-          <div class="audience__cta-script">You're not alone</div>
-          <div class="audience__cta-title">Reaching out is enough to begin</div>
-          <p class="audience__cta-body">
-            A single step — a message, a call — is all it takes to begin
-            finding your way back to calm and clarity.
-          </p>
-          <a href="#contact" class="audience__cta-btn">Book a Consultation</a>
-          <a href="https://wa.me/94702704537" target="_blank" class="audience__cta-wa">
-            <i class="fab fa-whatsapp"></i> Message on WhatsApp
+      <div class="foryou__cta-wrap reveal-r">
+        <div class="foryou__cta">
+          <div class="foryou__cta-deco"></div>
+          <span class="foryou__cta-script">You're not alone</span>
+          <h3 class="foryou__cta-title">Reaching out<br>is enough to begin</h3>
+          <p>A single step — a message, a call — is all it takes to begin finding your way back to calm and clarity.</p>
+          <a href="#contact" class="btn-primary btn-full">
+            <i class="fas fa-calendar-check"></i>
+            <span>Book a Consultation</span>
+          </a>
+          <a href="https://wa.me/94702704537" target="_blank" class="foryou__wa">
+            <i class="fab fa-whatsapp"></i>
+            <span>Message on WhatsApp</span>
           </a>
         </div>
       </div>
@@ -384,45 +467,41 @@
 </section>
 
 
-<!-- ════════════════════════════════════════
-     ARTICLES SECTION
-════════════════════════════════════════ -->
+<!-- ══════════════════════════════════════
+     ARTICLES
+══════════════════════════════════════ -->
 <section id="articles" class="articles">
   <div class="wrap">
 
-    <div class="articles__head reveal">
+    <div class="articles__header reveal">
       <div>
-        <div class="t-label" style="color:var(--rose);margin-bottom:16px;display:flex;align-items:center;gap:12px">
-          <span style="display:block;width:28px;height:1px;background:var(--rose)"></span>
-          Insights &amp; Reflections
+        <div class="section-label">
+          <span class="section-label__line"></span>
+          <span>Insights &amp; Reflections</span>
         </div>
-        <h2 class="articles__title">From the<br><em>Healing Space</em></h2>
+        <h2 class="section-title">From the<br><em>Healing Space</em></h2>
       </div>
-      <p class="articles__intro">
-        Gentle thoughts, guidance and reflections on parenting, mindfulness, children's emotional wellbeing and the journey toward inner calm.
-      </p>
+      <p class="articles__intro">Gentle thoughts, guidance and reflections on parenting, mindfulness, children's emotional wellbeing and the journey toward inner calm.</p>
     </div>
 
-    <!-- Filter tags -->
     <div class="articles__filters reveal" id="articles-filters">
-      <button class="art-filter active" data-tag="all">All Articles</button>
-      <button class="art-filter" data-tag="Mindfulness">Mindfulness</button>
-      <button class="art-filter" data-tag="Parenting">Parenting</button>
-      <button class="art-filter" data-tag="Children">Children</button>
-      <button class="art-filter" data-tag="Wellbeing">Wellbeing</button>
+      <button class="art-pill active" data-tag="all">All</button>
+      <button class="art-pill" data-tag="Mindfulness">Mindfulness</button>
+      <button class="art-pill" data-tag="Parenting">Parenting</button>
+      <button class="art-pill" data-tag="Children">Children</button>
+      <button class="art-pill" data-tag="Wellbeing">Wellbeing</button>
     </div>
 
-    <!-- Article cards grid -->
     <div class="articles__grid reveal" id="articles-grid">
-      <!-- Populated by JS -->
       <div class="articles__empty" id="articles-empty">
-        <i class="fas fa-feather-alt"></i>
+        <div class="articles__empty-icon"><i class="fas fa-feather-alt"></i></div>
         <p>Articles will appear here soon.</p>
+        <span>Check back or ask Asha about her latest insights.</span>
       </div>
     </div>
 
     <div class="articles__more reveal" id="articles-more" style="display:none">
-      <button class="btn btn--ghost" id="load-more-btn">
+      <button class="btn-outline" id="load-more-btn">
         <i class="fas fa-plus"></i> Load More Articles
       </button>
     </div>
@@ -431,17 +510,21 @@
 </section>
 
 
-<!-- ════════════════════════════════════════
+<!-- ══════════════════════════════════════
      INSTAGRAM
-════════════════════════════════════════ -->
+══════════════════════════════════════ -->
 <section id="instagram" class="insta">
   <div class="wrap">
-    <div class="reveal">
-      <div class="t-label">Stay Connected</div>
-      <h2 class="insta__title">From Our <em>Instagram</em></h2>
-      <p class="insta__sub">Gentle thoughts, tips and reflections on parenting, mindfulness and emotional wellbeing — shared daily.</p>
+    <div class="insta__header reveal">
+      <div class="section-label">
+        <span class="section-label__line"></span>
+        <span>Stay Connected</span>
+      </div>
+      <h2 class="section-title">From Our<br><em>Instagram</em></h2>
+      <p>Gentle thoughts, tips and reflections on parenting, mindfulness and emotional wellbeing — shared daily.</p>
       <a href="https://www.instagram.com/myhealingspace.lk" target="_blank" class="insta__handle">
-        <i class="fab fa-instagram"></i> @myhealingspace.lk
+        <i class="fab fa-instagram"></i>
+        <span>@myhealingspace.lk</span>
       </a>
     </div>
 
@@ -451,54 +534,57 @@
     </div>
 
     <div class="insta__follow reveal">
-      <a href="https://www.instagram.com/myhealingspace.lk" target="_blank" class="btn btn--solid">
-        <i class="fab fa-instagram"></i> Follow on Instagram
+      <a href="https://www.instagram.com/myhealingspace.lk" target="_blank" class="btn-primary">
+        <i class="fab fa-instagram"></i>
+        <span>Follow on Instagram</span>
       </a>
     </div>
   </div>
 </section>
 
 
-<!-- ════════════════════════════════════════
+<!-- ══════════════════════════════════════
      CONTACT
-════════════════════════════════════════ -->
+══════════════════════════════════════ -->
 <section id="contact" class="contact">
+  <div class="contact__bg"></div>
   <div class="wrap">
-    <div class="contact__inner">
+    <div class="contact__layout">
 
-      <div class="reveal-l">
-        <div class="t-label" style="color:var(--rose);margin-bottom:16px;display:flex;align-items:center;gap:12px">
-          <span style="display:block;width:28px;height:1px;background:var(--rose)"></span>
-          Get in Touch
+      <div class="contact__left reveal-l">
+        <div class="section-label">
+          <span class="section-label__line"></span>
+          <span>Get in Touch</span>
         </div>
         <h2 class="contact__title">Let's begin with<br>a <em>conversation</em></h2>
+        <p class="contact__intro">Every journey starts with a single step. Reach out — I'll respond with care within 24 hours.</p>
 
-        <div class="contact__info">
-          <div class="cinfo">
-            <div class="cinfo__icon"><i class="fas fa-map-marker-alt"></i></div>
-            <div>
-              <div class="cinfo__label">Address</div>
-              <div class="cinfo__val">68, Arthur V. Dias Mawatha, Panadura, Sri Lanka</div>
+        <div class="contact__details">
+          <div class="contact-item">
+            <div class="contact-item__icon"><i class="fas fa-map-marker-alt"></i></div>
+            <div class="contact-item__text">
+              <span>Address</span>
+              <strong>68, Arthur V. Dias Mawatha, Panadura, Sri Lanka</strong>
             </div>
           </div>
-          <div class="cinfo">
-            <div class="cinfo__icon"><i class="fab fa-whatsapp"></i></div>
-            <div>
-              <div class="cinfo__label">Phone / WhatsApp</div>
-              <div class="cinfo__val"><a href="https://wa.me/94702704537">+94 702 704 537</a></div>
+          <div class="contact-item">
+            <div class="contact-item__icon"><i class="fab fa-whatsapp"></i></div>
+            <div class="contact-item__text">
+              <span>WhatsApp / Phone</span>
+              <strong><a href="https://wa.me/94702704537">+94 702 704 537</a></strong>
             </div>
           </div>
-          <div class="cinfo">
-            <div class="cinfo__icon"><i class="fas fa-envelope"></i></div>
-            <div>
-              <div class="cinfo__label">Email</div>
-              <div class="cinfo__val"><a href="mailto:asha_wani@outlook.com">asha_wani@outlook.com</a></div>
+          <div class="contact-item">
+            <div class="contact-item__icon"><i class="fas fa-envelope"></i></div>
+            <div class="contact-item__text">
+              <span>Email</span>
+              <strong><a href="mailto:asha_wani@outlook.com">asha_wani@outlook.com</a></strong>
             </div>
           </div>
         </div>
 
-        <div class="contact__note">
-          <div class="contact__note-title">Professional Guidelines</div>
+        <div class="contact__ethics">
+          <div class="contact__ethics-title"><i class="fas fa-shield-halved"></i> Professional Guidelines</div>
           <ul>
             <li>Confidentiality is respected at all times</li>
             <li>Online counselling is provided where appropriate</li>
@@ -508,32 +594,41 @@
         </div>
       </div>
 
-      <div class="reveal-r">
-        <div class="form">
-          <div class="form__title">Send a Message</div>
-          <div class="form__sub">I'll respond within 24 hours.</div>
+      <div class="contact__right reveal-r">
+        <div class="contact__form-card">
+          <div class="contact__form-header">
+            <div class="contact__form-script">Send a Message</div>
+            <p>I'll respond within 24 hours.</p>
+          </div>
           <form id="contact-form">
-            <div class="form__row">
-              <div class="form__field">
+            <div class="field-row">
+              <div class="field">
                 <label for="fn">First Name</label>
                 <input type="text" id="fn" name="firstName" placeholder="Jane" required>
               </div>
-              <div class="form__field">
+              <div class="field">
                 <label for="ln">Last Name</label>
                 <input type="text" id="ln" name="lastName" placeholder="Smith" required>
               </div>
             </div>
-            <div class="form__field">
-              <label for="em">Email</label>
+            <div class="field">
+              <label for="em">Email Address</label>
               <input type="email" id="em" name="email" placeholder="your@email.com" required>
             </div>
-            <div class="form__field">
+            <div class="field">
+              <label for="ph">Phone (optional)</label>
+              <input type="tel" id="ph" name="phone" placeholder="+94 7XX XXX XXX">
+            </div>
+            <div class="field">
               <label for="msg">How can I help?</label>
               <textarea id="msg" name="message" placeholder="Tell me a little about what you're looking for..." required></textarea>
             </div>
-            <button type="submit" class="form__submit">Send Message</button>
-            <div class="form__ok" id="form-ok">
-              <i class="fas fa-check-circle" style="color:var(--moss);margin-right:8px"></i>
+            <button type="submit" class="btn-submit">
+              <span>Send Message</span>
+              <i class="fas fa-paper-plane"></i>
+            </button>
+            <div class="form-success" id="form-ok">
+              <i class="fas fa-check-circle"></i>
               Thank you — I'll be in touch very soon.
             </div>
           </form>
@@ -545,24 +640,26 @@
 </section>
 
 
-<!-- ════════════════════════════════════════
+<!-- ══════════════════════════════════════
      FOOTER
-════════════════════════════════════════ -->
-<footer>
+══════════════════════════════════════ -->
+<footer class="footer">
+  <div class="footer__top-strip"></div>
   <div class="wrap">
-    <div class="footer__top">
-      <div>
+    <div class="footer__main">
+      <div class="footer__brand">
         <span class="footer__logo">My Healing Space</span>
-        <p class="footer__tagline">A gentle space for clarity, calm, and emotional healing — supporting children, parents, and families across Sri Lanka.</p>
+        <p>A sanctuary for clarity, calm, and emotional healing — supporting children, parents, and families across Sri Lanka.</p>
         <div class="footer__socials">
-          <a href="https://www.facebook.com" target="_blank" class="footer__soc"><i class="fab fa-facebook-f"></i></a>
-          <a href="https://www.instagram.com/myhealingspace.lk" target="_blank" class="footer__soc"><i class="fab fa-instagram"></i></a>
-          <a href="https://www.linkedin.com" target="_blank" class="footer__soc"><i class="fab fa-linkedin-in"></i></a>
+          <a href="https://www.facebook.com" target="_blank"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://www.instagram.com/myhealingspace.lk" target="_blank"><i class="fab fa-instagram"></i></a>
+          <a href="https://www.linkedin.com" target="_blank"><i class="fab fa-linkedin-in"></i></a>
         </div>
       </div>
-      <div>
-        <div class="footer__col-title">Navigate</div>
-        <ul class="footer__links">
+
+      <div class="footer__col">
+        <h4>Navigate</h4>
+        <ul>
           <li><a href="#home">Home</a></li>
           <li><a href="#about">About Asha</a></li>
           <li><a href="#services">Programs</a></li>
@@ -570,19 +667,30 @@
           <li><a href="#contact">Contact</a></li>
         </ul>
       </div>
-      <div>
-        <div class="footer__col-title">Contact</div>
-        <ul class="footer__links">
+
+      <div class="footer__col">
+        <h4>Reach Out</h4>
+        <ul>
           <li><a href="https://wa.me/94702704537">+94 702 704 537</a></li>
           <li><a href="mailto:asha_wani@outlook.com">asha_wani@outlook.com</a></li>
-          <li style="color:rgba(255,255,255,.3);font-size:.85rem;line-height:1.7;cursor:default">68 Arthur V. Dias Mawatha,<br>Panadura, Sri Lanka</li>
+          <li class="footer__addr">68 Arthur V. Dias Mawatha,<br>Panadura, Sri Lanka</li>
+        </ul>
+      </div>
+
+      <div class="footer__col">
+        <h4>Programs</h4>
+        <ul>
+          <li><a href="#services">Counselling</a></li>
+          <li><a href="#services">Special Education</a></li>
+          <li><a href="#services">Mindfulness</a></li>
+          <li><a href="#services">Social Outreach</a></li>
         </ul>
       </div>
     </div>
+
     <div class="footer__bottom">
       <span>© 2026 My Healing Space · Asha Wanigasekera · Professional Counseling Services, Sri Lanka</span>
-      <!-- Hidden admin trigger -->
-      <button class="admin-trigger" id="adminTrigger" title="Admin Access" aria-label="Admin">
+      <button class="admin-trigger" id="adminTrigger" aria-label="Admin">
         <i class="fas fa-lock"></i>
       </button>
     </div>
@@ -590,70 +698,65 @@
 </footer>
 
 
-<!-- ════════════════════════════════════════
-     FLOATING ELEMENTS
-════════════════════════════════════════ -->
-<a href="https://wa.me/94702704537" target="_blank" class="wa-fab" title="Chat on WhatsApp">
+<!-- ══════════════════════════════════════
+     FLOATING
+══════════════════════════════════════ -->
+<a href="https://wa.me/94702704537" target="_blank" class="wa-float" title="Chat on WhatsApp">
   <i class="fab fa-whatsapp"></i>
+  <span class="wa-float__pulse"></span>
 </a>
 <button class="back-top" id="backTop" title="Back to top">
   <i class="fas fa-arrow-up"></i>
 </button>
 
 
-<!-- ════════════════════════════════════════
-     ADMIN LOGIN MODAL
-════════════════════════════════════════ -->
-<div class="modal-overlay" id="adminLoginOverlay">
-  <div class="modal admin-login">
-    <button class="modal__close" id="adminLoginClose"><i class="fas fa-times"></i></button>
-    <div class="modal__icon"><i class="fas fa-lock"></i></div>
-    <h3 class="modal__title">Admin Access</h3>
-    <p class="modal__sub">Enter your password to manage articles</p>
-    <div class="form__field" style="margin-bottom:16px">
+<!-- ══════════════════════════════════════
+     ADMIN LOGIN
+══════════════════════════════════════ -->
+<div class="overlay" id="adminLoginOverlay">
+  <div class="modal admin-login-modal">
+    <button class="modal-close" id="adminLoginClose"><i class="fas fa-times"></i></button>
+    <div class="modal-icon"><i class="fas fa-lock"></i></div>
+    <h3>Admin Access</h3>
+    <p>Enter your password to manage articles</p>
+    <div class="field" style="margin-bottom:16px;text-align:left">
       <label for="adminPass">Password</label>
       <input type="password" id="adminPass" placeholder="Enter password" autocomplete="off">
     </div>
-    <div class="admin-login__err" id="adminLoginErr">Incorrect password. Please try again.</div>
-    <button class="form__submit" id="adminLoginBtn">Login</button>
+    <div class="admin-err" id="adminLoginErr">Incorrect password. Please try again.</div>
+    <button class="btn-submit" id="adminLoginBtn"><span>Login</span><i class="fas fa-arrow-right"></i></button>
   </div>
 </div>
 
 
-<!-- ════════════════════════════════════════
-     ADMIN DASHBOARD MODAL
-════════════════════════════════════════ -->
-<div class="modal-overlay" id="adminDashOverlay">
-  <div class="modal admin-dash">
-    <div class="admin-dash__header">
+<!-- ══════════════════════════════════════
+     ADMIN DASHBOARD
+══════════════════════════════════════ -->
+<div class="overlay" id="adminDashOverlay">
+  <div class="modal admin-dash-modal">
+    <div class="admin-dash__head">
       <div>
-        <h3 class="admin-dash__title"><i class="fas fa-feather-alt"></i> Articles Manager</h3>
-        <p class="admin-dash__sub">Add, edit or delete articles</p>
+        <h3><i class="fas fa-feather-alt"></i> Articles Manager</h3>
+        <p>Add, edit or delete articles — and upload saved images</p>
       </div>
-      <button class="modal__close" id="adminDashClose"><i class="fas fa-times"></i></button>
+      <button class="modal-close" id="adminDashClose"><i class="fas fa-times"></i></button>
     </div>
 
-    <!-- Tab bar -->
     <div class="admin-tabs">
-      <button class="admin-tab active" data-tab="add">
-        <i class="fas fa-plus"></i> Add Article
-      </button>
-      <button class="admin-tab" data-tab="manage">
-        <i class="fas fa-list"></i> Manage Articles
-      </button>
+      <button class="admin-tab active" data-tab="add"><i class="fas fa-plus"></i> Add Article</button>
+      <button class="admin-tab" data-tab="manage"><i class="fas fa-list"></i> Manage Articles</button>
     </div>
 
-    <!-- Add / Edit form -->
     <div class="admin-panel" id="tab-add">
       <form id="article-form">
         <input type="hidden" id="edit-id">
-        <div class="form__field">
+        <div class="field">
           <label for="art-title">Article Title *</label>
           <input type="text" id="art-title" placeholder="e.g. Understanding Your Child's Emotions" required>
         </div>
-        <div class="form__row">
-          <div class="form__field">
-            <label for="art-tag">Category / Tag *</label>
+        <div class="field-row">
+          <div class="field">
+            <label for="art-tag">Category *</label>
             <select id="art-tag">
               <option value="Mindfulness">Mindfulness</option>
               <option value="Parenting">Parenting</option>
@@ -661,52 +764,69 @@
               <option value="Wellbeing">Wellbeing</option>
             </select>
           </div>
-          <div class="form__field">
+          <div class="field">
             <label for="art-date">Date</label>
             <input type="date" id="art-date">
           </div>
         </div>
-        <div class="form__field">
+        <div class="field">
           <label for="art-excerpt">Short Summary * <small>(shown on card)</small></label>
-          <textarea id="art-excerpt" rows="2" placeholder="A brief introduction to the article..."></textarea>
+          <textarea id="art-excerpt" rows="2" placeholder="A brief introduction..."></textarea>
         </div>
-        <div class="form__field">
+        <div class="field">
           <label for="art-body">Full Article Content *</label>
-          <textarea id="art-body" rows="8" placeholder="Write the full article here. You can use line breaks for paragraphs." style="min-height:180px"></textarea>
+          <textarea id="art-body" rows="8" placeholder="Write the full article here. Use double line breaks for paragraphs." style="min-height:180px"></textarea>
         </div>
-        <div class="form__field">
-          <label for="art-img">Image URL <small>(paste a direct image link)</small></label>
-          <input type="url" id="art-img" placeholder="https://example.com/image.jpg">
+
+        <!-- IMAGE SECTION — URL or Upload -->
+        <div class="field">
+          <label>Article Image</label>
+          <div class="img-input-tabs">
+            <button type="button" class="img-tab active" data-mode="url">🔗 URL</button>
+            <button type="button" class="img-tab" data-mode="upload">📁 Upload Saved Image</button>
+          </div>
+
+          <div class="img-mode" id="img-mode-url">
+            <input type="url" id="art-img-url" placeholder="https://example.com/image.jpg">
+          </div>
+
+          <div class="img-mode" id="img-mode-upload" style="display:none">
+            <div class="img-upload-zone" id="imgUploadZone">
+              <i class="fas fa-cloud-upload-alt"></i>
+              <span>Click to choose or drag &amp; drop image</span>
+              <small>JPG, PNG, WEBP up to 5MB</small>
+              <input type="file" id="imgFileInput" accept="image/*" style="display:none">
+            </div>
+          </div>
+
           <div class="img-preview-wrap" id="img-preview-wrap" style="display:none">
             <img id="img-preview" src="" alt="preview">
+            <button type="button" class="img-remove" id="imgRemove"><i class="fas fa-times"></i> Remove</button>
           </div>
         </div>
-        <div class="admin-form-actions">
-          <button type="submit" class="form__submit" id="art-submit-btn">
-            <i class="fas fa-plus"></i> Publish Article
-          </button>
-          <button type="button" class="btn btn--ghost" id="art-cancel-edit" style="display:none">Cancel Edit</button>
+
+        <div class="admin-actions">
+          <button type="submit" class="btn-submit" id="art-submit-btn"><span>Publish Article</span><i class="fas fa-plus"></i></button>
+          <button type="button" class="btn-outline" id="art-cancel-edit" style="display:none">Cancel Edit</button>
         </div>
       </form>
     </div>
 
-    <!-- Manage list -->
     <div class="admin-panel" id="tab-manage" style="display:none">
-      <div class="admin-article-list" id="admin-article-list">
+      <div class="admin-list" id="admin-article-list">
         <div class="admin-empty">No articles yet. Add your first one!</div>
       </div>
     </div>
-
   </div>
 </div>
 
 
-<!-- ════════════════════════════════════════
-     ARTICLE READ MODAL (full screen)
-════════════════════════════════════════ -->
-<div class="modal-overlay art-read-overlay" id="artReadOverlay">
+<!-- ══════════════════════════════════════
+     ARTICLE READ MODAL
+══════════════════════════════════════ -->
+<div class="overlay art-read-overlay" id="artReadOverlay">
   <div class="modal art-read-modal" id="artReadModal">
-    <button class="modal__close art-read-close" id="artReadClose"><i class="fas fa-times"></i></button>
+    <button class="modal-close art-read-close" id="artReadClose"><i class="fas fa-times"></i></button>
     <div id="art-read-content"></div>
   </div>
 </div>
