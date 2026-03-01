@@ -435,13 +435,25 @@ document.addEventListener('DOMContentLoaded', () => {
       imgModeUpload.style.display = mode === 'upload' ? 'block' : 'none';
     });
   });
+document.getElementById('art-img-url')?.addEventListener('input', function () {
+  const url = this.value.trim();
+  pendingFile = null;
 
-  document.getElementById('art-img-url')?.addEventListener('input', function () {
-    const url = this.value.trim();
-    pendingFile = null;
-    if (url) { currentImageData = url; showPreview(url); }
-    else     { currentImageData = '';  hidePreview(); }
-  });
+  // Simple check for image extensions
+  if (url.match(/\.(jpeg|jpg|png|webp|gif|bmp|svg)$/i)) {
+    currentImageData = url;
+    showPreview(url);
+  } else if (url === '') {
+    currentImageData = '';
+    hidePreview();
+  } else {
+    // Invalid URL for image
+    currentImageData = '';
+    hidePreview();
+    // Optionally show a warning
+    console.warn('Please enter a valid image URL');
+  }
+});
 
   const uploadZone = document.getElementById('imgUploadZone');
   const fileInput  = document.getElementById('imgFileInput');
