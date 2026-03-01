@@ -4,40 +4,56 @@
 ═══════════════════════════════════════════════════ */
 
 /* ────────────────────────────────────────────────
-   FIREBASE IMPORTS
-   NOTE: Your HTML <script> tag must have type="module"
-   e.g. <script type="module" src="script.js"></script>
-──────────────────────────────────────────────── */
-import { initializeApp }                           from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-import { getFirestore, collection, getDocs,
-         addDoc, updateDoc, deleteDoc,
-         doc, query, orderBy }                     from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
-import { getStorage, ref,
-         uploadBytes, getDownloadURL }             from "https://www.gstatic.com/firebasejs/10.12.0/firebase-storage.js";
-
-/* ────────────────────────────────────────────────
-   🔥 YOUR FIREBASE CONFIG
-   Replace ALL values below with your own from:
-   Firebase Console → Project Settings → Your Apps
+   🔥 FIREBASE CONFIG
 ──────────────────────────────────────────────── */
 const firebaseConfig = {
-  apiKey: "AIzaSyCuH7ri961hF6L983W6uu28Bvw8JTEGOxc",
-  authDomain: "articles-2d6e2.firebaseapp.com",
-  projectId: "articles-2d6e2",
-  storageBucket: "articles-2d6e2.firebasestorage.app",
+  apiKey:            "AIzaSyCuH7ri961hF6L983W6uu28Bvw8JTEGOxc",
+  authDomain:        "articles-2d6e2.firebaseapp.com",
+  projectId:         "articles-2d6e2",
+  storageBucket:     "articles-2d6e2.firebasestorage.app",
   messagingSenderId: "450668688360",
-  appId: "1:450668688360:web:36312902989aca92b1ea5d",
-  measurementId: "G-RLH1EBG68F"
+  appId:             "1:450668688360:web:36312902989aca92b1ea5d"
 };
 
-/* ── Init Firebase ── */
-const app       = initializeApp(firebaseConfig);
-const db        = getFirestore(app);
-const storage   = getStorage(app);
-const artColRef = collection(db, 'articles');
+/* ────────────────────────────────────────────────
+   Firebase variables — filled after async import
+──────────────────────────────────────────────── */
+let db        = null;
+let storage   = null;
+let artColRef = null;
+let fbReady   = false;
+
+/* ────────────────────────────────────────────────
+   Load Firebase asynchronously
+   The page works FULLY even if this fails.
+   Only articles need Firebase.
+──────────────────────────────────────────────── */
+async function initFirebase() {
+  try {
+    const { initializeApp } = await import("https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js");
+    const { getFirestore, collection, getDocs, addDoc,
+            updateDoc, deleteDoc, doc, query, orderBy } = await import("https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js");
+    const { getStorage, ref, uploadBytes, getDownloadURL } = await import("https://www.gstatic.com/firebasejs/10.12.0/firebase-storage.js");
+
+    const app = initializeApp(firebaseConfig);
+    db        = getFirestore(app);
+    storage   = getStorage(app);
+    artColRef = collection(db, 'articles');
+    fbReady   = true;
+
+    // Store helpers so article functions can reach them
+    window._fb = { getDocs, addDoc, updateDoc, deleteDoc, doc, query, orderBy, ref, uploadBytes, getDownloadURL };
+    return true;
+  } catch (err) {
+    console.warn('Firebase failed to load:', err);
+    return false;
+  }
+}
 
 /* ════════════════════════════════════════════════
-   MAIN — wait for DOM
+   MAIN — DOM ready
+   Everything here runs immediately.
+   Firebase & articles load AFTER, in the background.
 ════════════════════════════════════════════════ */
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -91,7 +107,7 @@ document.addEventListener('DOMContentLoaded', () => {
   revEls.forEach(el => revIO.observe(el));
 
   /* ────────────────────────────────────────────────
-     NAV + SCROLL + BACK TO TOP
+     NAV + BACK TO TOP
   ──────────────────────────────────────────────── */
   const nav     = document.getElementById('nav');
   const backTop = document.getElementById('backTop');
@@ -156,42 +172,56 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
 
+  /* ────────────────────────────────────────────────
+     PARALLAX ORBS
+  ──────────────────────────────────────────────── */
+  const orbs = document.querySelectorAll('.hero__orb');
+  window.addEventListener('scroll', () => {
+    const sy = window.scrollY;
+    orbs.forEach((orb, i) => {
+      orb.style.transform = `translateY(${sy * (0.04 + i * 0.02)}px)`;
+    });
+  }, { passive: true });
+
   /* ════════════════════════════════════════════════
      ARTICLES SYSTEM
   ════════════════════════════════════════════════ */
 
-  const ADMIN_PASS = 'healing2026'; // ← Change this password
+  const ADMIN_PASS = 'healing2026';
 
   let articles     = [];
   let activeFilter = 'all';
   let visibleCount = 6;
 
-  /* ── Format date ── */
   function fmtDate(str) {
     if (!str) return '';
-    const d = new Date(str);
-    return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+    return new Date(str).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
   }
 
-  /* ────────────────────────────────────────────────
-     FIREBASE: Load articles from Firestore
-  ──────────────────────────────────────────────── */
+  /* ── Firebase: Load ── */
   async function loadArticles() {
+    showGridLoading(true);
+
+    if (!fbReady) {
+      showGridLoading(false);
+      renderArticles();
+      return;
+    }
+
     try {
-      showGridLoading(true);
+      const { getDocs, query, orderBy } = window._fb;
       const q        = query(artColRef, orderBy('createdAt', 'desc'));
       const snapshot = await getDocs(q);
       articles       = snapshot.docs.map(d => ({ id: d.id, ...d.data() }));
-      renderArticles();
     } catch (err) {
-      console.error('Failed to load articles:', err);
-      showGridError();
+      console.error('Load articles failed:', err);
     } finally {
       showGridLoading(false);
     }
+
+    renderArticles();
   }
 
-  /* ── Loading / error states ── */
   function showGridLoading(on) {
     let loader = document.getElementById('articles-loader');
     if (!loader) {
@@ -204,52 +234,31 @@ document.addEventListener('DOMContentLoaded', () => {
     loader.style.display = on ? 'block' : 'none';
   }
 
-  function showGridError() {
-    const grid = document.getElementById('articles-grid');
-    if (!grid) return;
-    grid.innerHTML = `<div style="text-align:center;padding:3rem;color:#c0392b;grid-column:1/-1">
-      <i class="fas fa-exclamation-circle"></i> Could not load articles. Check your Firebase config.
-    </div>`;
-  }
-
-  /* ────────────────────────────────────────────────
-     FIREBASE: Add article
-  ──────────────────────────────────────────────── */
+  /* ── Firebase: Add / Update / Delete ── */
   async function addArticle(data) {
-    await addDoc(artColRef, {
-      ...data,
-      createdAt: Date.now()
-    });
+    const { addDoc } = window._fb;
+    await addDoc(artColRef, { ...data, createdAt: Date.now() });
   }
 
-  /* ────────────────────────────────────────────────
-     FIREBASE: Update article
-  ──────────────────────────────────────────────── */
   async function updateArticle(id, data) {
-    await updateDoc(doc(db, 'articles', id), data);
+    const { updateDoc, doc: fbDoc } = window._fb;
+    await updateDoc(fbDoc(db, 'articles', id), data);
   }
 
-  /* ────────────────────────────────────────────────
-     FIREBASE: Delete article
-  ──────────────────────────────────────────────── */
   async function deleteArticleDB(id) {
-    await deleteDoc(doc(db, 'articles', id));
+    const { deleteDoc, doc: fbDoc } = window._fb;
+    await deleteDoc(fbDoc(db, 'articles', id));
   }
 
-  /* ────────────────────────────────────────────────
-     FIREBASE: Upload image to Storage
-  ──────────────────────────────────────────────── */
   async function uploadImageToStorage(file) {
+    const { ref: fbRef, uploadBytes, getDownloadURL } = window._fb;
     const filename   = `articles/${Date.now()}-${file.name.replace(/\s+/g, '_')}`;
-    const storageRef = ref(storage, filename);
+    const storageRef = fbRef(storage, filename);
     await uploadBytes(storageRef, file);
-    const url = await getDownloadURL(storageRef);
-    return url;
+    return await getDownloadURL(storageRef);
   }
 
-  /* ────────────────────────────────────────────────
-     RENDER GRID
-  ──────────────────────────────────────────────── */
+  /* ── Render grid ── */
   function renderArticles() {
     const grid  = document.getElementById('articles-grid');
     const empty = document.getElementById('articles-empty');
@@ -268,12 +277,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     empty.style.display = 'none';
 
-    const shown = filtered.slice(0, visibleCount);
-    shown.forEach(art => grid.appendChild(createCard(art)));
+    filtered.slice(0, visibleCount).forEach(art => grid.appendChild(createCard(art)));
     more.style.display = filtered.length > visibleCount ? 'block' : 'none';
   }
 
-  /* ── Create card ── */
   function createCard(art) {
     const card = document.createElement('div');
     card.className  = 'art-card';
@@ -300,7 +307,6 @@ document.addEventListener('DOMContentLoaded', () => {
     return card;
   }
 
-  /* ── Filter pills ── */
   document.querySelectorAll('.art-pill').forEach(btn => {
     btn.addEventListener('click', () => {
       document.querySelectorAll('.art-pill').forEach(b => b.classList.remove('active'));
@@ -316,7 +322,7 @@ document.addEventListener('DOMContentLoaded', () => {
     renderArticles();
   });
 
-  /* ── Open article modal ── */
+  /* ── Article read modal ── */
   function openArticleModal(id) {
     const art = articles.find(a => a.id === id);
     if (!art) return;
@@ -385,13 +391,16 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   function openAdmin() {
+    if (!fbReady) {
+      alert('Firebase is still connecting. Please wait a moment and try again.');
+      return;
+    }
     renderAdminList();
     openOverlay('adminDashOverlay');
   }
 
   document.getElementById('adminDashClose')?.addEventListener('click', () => {
-    closeOverlay('adminDashOverlay');
-    resetForm();
+    closeOverlay('adminDashOverlay'); resetForm();
   });
   document.getElementById('adminDashOverlay')?.addEventListener('click', e => {
     if (e.target === e.currentTarget) { closeOverlay('adminDashOverlay'); resetForm(); }
@@ -408,9 +417,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  /* ── Image input: URL vs Upload ── */
-  let currentImageData = ''; // URL string (either typed URL or Firebase Storage URL)
-  let pendingFile      = null; // File object waiting to be uploaded on submit
+  /* ── Image input ── */
+  let currentImageData = '';
+  let pendingFile      = null;
 
   const imgModeUrl     = document.getElementById('img-mode-url');
   const imgModeUpload  = document.getElementById('img-mode-upload');
@@ -427,29 +436,18 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // URL input live preview
   document.getElementById('art-img-url')?.addEventListener('input', function () {
     const url = this.value.trim();
-    pendingFile = null; // clear any pending upload
-    if (url) {
-      currentImageData = url;
-      showPreview(url);
-    } else {
-      currentImageData = '';
-      hidePreview();
-    }
+    pendingFile = null;
+    if (url) { currentImageData = url; showPreview(url); }
+    else     { currentImageData = '';  hidePreview(); }
   });
 
-  /* ── Upload zone ── */
   const uploadZone = document.getElementById('imgUploadZone');
   const fileInput  = document.getElementById('imgFileInput');
 
   uploadZone?.addEventListener('click', () => fileInput.click());
-
-  uploadZone?.addEventListener('dragover', e => {
-    e.preventDefault();
-    uploadZone.classList.add('drag-over');
-  });
+  uploadZone?.addEventListener('dragover', e => { e.preventDefault(); uploadZone.classList.add('drag-over'); });
   uploadZone?.addEventListener('dragleave', () => uploadZone.classList.remove('drag-over'));
   uploadZone?.addEventListener('drop', e => {
     e.preventDefault();
@@ -457,25 +455,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const file = e.dataTransfer.files[0];
     if (file && file.type.startsWith('image/')) handleImageFile(file);
   });
-
   fileInput?.addEventListener('change', () => {
-    const file = fileInput.files[0];
-    if (file) handleImageFile(file);
+    if (fileInput.files[0]) handleImageFile(fileInput.files[0]);
   });
 
-  /* ────────────────────────────────────────────────
-     Handle image file selection
-     → Shows local preview immediately
-     → Actual upload to Firebase Storage happens on form submit
-  ──────────────────────────────────────────────── */
   function handleImageFile(file) {
-    if (file.size > 10 * 1024 * 1024) {
-      alert('Image is too large (max 10MB). Please use a smaller image.');
-      return;
-    }
-    pendingFile = file; // store for upload on submit
-
-    // Show local preview immediately (no upload yet)
+    if (file.size > 10 * 1024 * 1024) { alert('Max 10MB please.'); return; }
+    pendingFile = file;
     const reader = new FileReader();
     reader.onload = e => {
       showPreview(e.target.result);
@@ -490,12 +476,8 @@ document.addEventListener('DOMContentLoaded', () => {
   function showPreview(src) {
     imgPreviewWrap.style.display = 'block';
     imgPreviewEl.src = src;
-    imgPreviewEl.onerror = () => {
-      imgPreviewWrap.style.display = 'none';
-      currentImageData = '';
-    };
+    imgPreviewEl.onerror = () => { imgPreviewWrap.style.display = 'none'; currentImageData = ''; };
   }
-
   function hidePreview() {
     imgPreviewWrap.style.display = 'none';
     imgPreviewEl.src = '';
@@ -520,16 +502,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const newInput = uploadZone.querySelector('#imgFileInput');
     uploadZone.addEventListener('click', () => newInput.click());
     newInput.addEventListener('change', () => {
-      const file = newInput.files[0];
-      if (file) handleImageFile(file);
+      if (newInput.files[0]) handleImageFile(newInput.files[0]);
     });
   }
 
-  /* ────────────────────────────────────────────────
-     ARTICLE FORM SUBMIT
-     → Uploads image first (if file selected)
-     → Then saves article data to Firestore
-  ──────────────────────────────────────────────── */
+  /* ── Article form submit ── */
   const artForm   = document.getElementById('article-form');
   const submitBtn = document.getElementById('art-submit-btn');
   const cancelBtn = document.getElementById('art-cancel-edit');
@@ -551,14 +528,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (!title || !excerpt || !body) return;
 
-    // Disable button while saving
-    submitBtn.disabled = true;
+    submitBtn.disabled  = true;
     submitBtn.innerHTML = '<span>Saving...</span><i class="fas fa-spinner fa-spin"></i>';
 
     try {
       let imageUrl = currentImageData || document.getElementById('art-img-url').value.trim();
 
-      // If a local file is selected → upload to Firebase Storage first
       if (pendingFile) {
         submitBtn.innerHTML = '<span>Uploading image...</span><i class="fas fa-spinner fa-spin"></i>';
         imageUrl = await uploadImageToStorage(pendingFile);
@@ -567,24 +542,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const data = { title, tag, date, excerpt, body, image: imageUrl };
 
-      if (editId) {
-        await updateArticle(editId, data);
-      } else {
-        await addArticle(data);
-      }
+      if (editId) { await updateArticle(editId, data); }
+      else        { await addArticle(data); }
 
       await loadArticles();
       renderAdminList();
       resetForm();
 
-      // Switch to manage tab
       document.querySelectorAll('.admin-tab').forEach(b => b.classList.remove('active'));
       document.querySelectorAll('.admin-panel').forEach(p => p.style.display = 'none');
       document.querySelector('.admin-tab[data-tab="manage"]').classList.add('active');
       document.getElementById('tab-manage').style.display = 'block';
 
-      // Flash success
-      submitBtn.innerHTML  = '<span>✓ Saved!</span>';
+      submitBtn.innerHTML        = '<span>✓ Saved!</span>';
       submitBtn.style.background = 'var(--forest)';
       setTimeout(() => {
         submitBtn.innerHTML        = '<span>Publish Article</span><i class="fas fa-plus"></i>';
@@ -594,7 +564,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     } catch (err) {
       console.error('Save failed:', err);
-      alert('Failed to save article. Check your Firebase config and try again.\n\n' + err.message);
+      alert('Failed to save. Error: ' + err.message);
       submitBtn.innerHTML = '<span>Publish Article</span><i class="fas fa-plus"></i>';
       submitBtn.disabled  = false;
     }
@@ -638,8 +608,7 @@ document.addEventListener('DOMContentLoaded', () => {
       item.className = 'admin-item';
 
       const imgHTML = art.image
-        ? `<img src="${esc(art.image)}" alt=""
-              onerror="this.parentNode.innerHTML='<i class=fas fa-feather-alt></i>'">`
+        ? `<img src="${esc(art.image)}" alt="" onerror="this.parentNode.innerHTML='<i class=fas fa-feather-alt></i>'">`
         : `<i class="fas fa-feather-alt"></i>`;
 
       item.innerHTML = `
@@ -659,23 +628,21 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  /* ── Edit article ── */
   function editArticle(id) {
     const art = articles.find(a => a.id === id);
     if (!art) return;
 
-    document.getElementById('edit-id').value    = id;
-    document.getElementById('art-title').value  = art.title;
-    document.getElementById('art-tag').value    = art.tag;
-    document.getElementById('art-date').value   = art.date;
-    document.getElementById('art-excerpt').value= art.excerpt;
-    document.getElementById('art-body').value   = art.body;
-    document.getElementById('art-img-url').value= art.image || '';
+    document.getElementById('edit-id').value     = id;
+    document.getElementById('art-title').value   = art.title;
+    document.getElementById('art-tag').value     = art.tag;
+    document.getElementById('art-date').value    = art.date;
+    document.getElementById('art-excerpt').value = art.excerpt;
+    document.getElementById('art-body').value    = art.body;
+    document.getElementById('art-img-url').value = art.image || '';
 
     currentImageData = art.image || '';
     pendingFile      = null;
-    if (art.image) showPreview(art.image);
-    else hidePreview();
+    if (art.image) showPreview(art.image); else hidePreview();
 
     if (submitBtn) submitBtn.innerHTML = '<span>Update Article</span><i class="fas fa-save"></i>';
     if (cancelBtn) cancelBtn.style.display = 'inline-flex';
@@ -687,10 +654,8 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('tab-add').scrollTop = 0;
   }
 
-  /* ── Delete article ── */
   async function deleteArticle(id, itemEl) {
     if (!confirm('Delete this article? This cannot be undone.')) return;
-
     try {
       await deleteArticleDB(id);
       articles = articles.filter(a => a.id !== id);
@@ -698,13 +663,9 @@ document.addEventListener('DOMContentLoaded', () => {
       itemEl.style.transition = 'all .3s';
       itemEl.style.opacity    = '0';
       itemEl.style.transform  = 'translateX(24px)';
-      setTimeout(() => {
-        itemEl.remove();
-        if (articles.length === 0) renderAdminList();
-      }, 310);
+      setTimeout(() => { itemEl.remove(); if (articles.length === 0) renderAdminList(); }, 310);
     } catch (err) {
-      console.error('Delete failed:', err);
-      alert('Failed to delete article. Please try again.');
+      alert('Delete failed: ' + err.message);
     }
   }
 
@@ -720,7 +681,6 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.style.overflow = '';
   }
 
-  /* ESC to close */
   document.addEventListener('keydown', e => {
     if (e.key !== 'Escape') return;
     ['adminLoginOverlay', 'adminDashOverlay', 'artReadOverlay'].forEach(id => {
@@ -734,26 +694,18 @@ document.addEventListener('DOMContentLoaded', () => {
   function esc(str) {
     if (!str) return '';
     return String(str)
-      .replace(/&/g,  '&amp;')
-      .replace(/</g,  '&lt;')
-      .replace(/>/g,  '&gt;')
-      .replace(/"/g,  '&quot;')
-      .replace(/'/g,  '&#39;');
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;').replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
   }
 
   /* ════════════════════════════════════════════════
-     INIT — Load articles from Firebase on page load
+     INIT
+     Firebase loads async → then articles load
+     Everything else already running above ↑
   ════════════════════════════════════════════════ */
-  loadArticles();
+  initFirebase().then(() => {
+    loadArticles();
+  });
 
-  /* ── Parallax orbs on hero ── */
-  const orbs = document.querySelectorAll('.hero__orb');
-  window.addEventListener('scroll', () => {
-    const sy = window.scrollY;
-    orbs.forEach((orb, i) => {
-      const speed = 0.04 + i * 0.02;
-      orb.style.transform = `translateY(${sy * speed}px)`;
-    });
-  }, { passive: true });
-
-});
+}); // end DOMContentLoaded
