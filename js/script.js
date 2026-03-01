@@ -721,3 +721,4 @@ document.getElementById('art-img-url')?.addEventListener('input', function () {
   });
 
 }); // end DOMContentLoaded
+
